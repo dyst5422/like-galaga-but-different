@@ -205,6 +205,7 @@ version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c6b14f8ba7c373fdf7bd27547bb95f2849b2569bf02bbf3d19ca54e9d692de4f"
 dependencies = [
+ "bevy_dylib",
  "bevy_internal",
  "syn",
 ]
@@ -318,6 +319,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_dylib"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "efa62c7c03470969539a07337bf8c5694c0b952678fd081d68b6331842134b85"
+dependencies = [
+ "bevy_internal",
+]
+
+[[package]]
 name = "bevy_dynamic_plugin"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -358,15 +368,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "bevy_fly_camera"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6f73c57d18a11c6135576fe34fa434640d2bc5a4c5ac4ea0eb0799bebc109b3a"
-dependencies = [
- "bevy",
 ]
 
 [[package]]
@@ -2049,7 +2050,6 @@ name = "like-galaga-but-different"
 version = "0.1.0"
 dependencies = [
  "bevy",
- "bevy_fly_camera",
  "bevy_rapier2d",
 ]
 
