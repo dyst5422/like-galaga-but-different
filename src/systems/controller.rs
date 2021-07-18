@@ -1,16 +1,17 @@
 use crate::components::player::Player;
+use crate::components::ship::Ship;
+use bevy::input::mouse::MouseMotion;
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
-use crate::components::ship::Ship;
 
 pub fn controller(
-    input: Res<Input<KeyCode>>,
+    keyboard_input: Res<Input<KeyCode>>,
     mut query: Query<(&mut RigidBodyVelocity, &Ship), With<Player>>,
 ) {
-    let w = input.pressed(KeyCode::W);
-    let a = input.pressed(KeyCode::A);
-    let s = input.pressed(KeyCode::S);
-    let d = input.pressed(KeyCode::D);
+    let w = keyboard_input.pressed(KeyCode::W);
+    let a = keyboard_input.pressed(KeyCode::A);
+    let s = keyboard_input.pressed(KeyCode::S);
+    let d = keyboard_input.pressed(KeyCode::D);
 
     let mut vec = Vec2::new(0.0, 0.0);
 
@@ -26,7 +27,8 @@ pub fn controller(
         vec.x = 1.0;
     }
 
-    for (mut body, ship) in query.iter_mut() {
-        body.linvel = (vec * ship.movement_speed).into();
+    let unit = vec.normalize_or_zero();
+    for (mut velocity, ship) in query.iter_mut() {
+        velocity.linvel = (unit * ship.movement_speed).into();
     }
 }

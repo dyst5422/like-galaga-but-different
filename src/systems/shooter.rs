@@ -1,16 +1,15 @@
-use bevy::prelude::*;
-use bevy_rapier2d::prelude::*;
-use crate::components::shoots::Shoots;
 use crate::components::bullet::Bullet;
 use crate::components::player::Player;
-
+use crate::components::shoots::Shoots;
+use bevy::prelude::*;
+use bevy_rapier2d::prelude::*;
 
 pub fn shooter(
     mut commands: Commands,
     mut query: Query<(&RigidBodyPosition, &mut Shoots), Without<Player>>,
     mut texture_atlases: ResMut<Assets<TextureAtlas>>,
     asset_server: Res<AssetServer>,
-    time: Res<Time>
+    time: Res<Time>,
 ) {
     let texture_handle = asset_server.load("textures/bullet.png");
     let texture_atlas = TextureAtlas::from_grid(texture_handle, Vec2::new(1.0, 3.0), 1, 1);
@@ -26,10 +25,14 @@ pub fn shooter(
                     ..Default::default()
                 })
                 .insert_bundle(RigidBodyBundle {
-                    position: Vec2::new(body.position.translation.x + shoot.displacement.x, body.position.translation.y + shoot.displacement.y).into(),
+                    position: Vec2::new(
+                        body.position.translation.x + shoot.displacement.x,
+                        body.position.translation.y + shoot.displacement.y,
+                    )
+                    .into(),
                     velocity: RigidBodyVelocity {
                         linvel: Vec2::new(0.0, shoot.muzzle_velocity).into(),
-                        angvel: 0.0
+                        angvel: 0.0,
                     },
                     activation: RigidBodyActivation::cannot_sleep(),
                     ccd: RigidBodyCcd {
@@ -39,7 +42,7 @@ pub fn shooter(
                     ..Default::default()
                 })
                 .insert(RigidBodyPositionSync::Discrete)
-                .insert(Bullet);
+                .insert(Bullet::default());
         }
     }
 }

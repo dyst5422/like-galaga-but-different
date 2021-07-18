@@ -1,7 +1,9 @@
 use crate::components::player::Player;
+use crate::components::ship::Ship;
+use crate::components::shoots::Shoots;
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
-use crate::components::shoots::Shoots;
+use crate::components::health::Health;
 
 pub fn setup_player_ship(
     mut commands: Commands,
@@ -35,7 +37,8 @@ pub fn setup_player_ship(
             displacement: Vec2::new(0.0, 7.0).into(),
             ..Default::default()
         })
+        .insert(Health::default())
         .insert(RigidBodyPositionSync::Discrete)
         .insert(Player)
-        .insert(Ship);
+        .insert(Ship::default());
 }

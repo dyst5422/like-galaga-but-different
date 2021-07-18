@@ -8,7 +8,6 @@ pub struct Shoots {
     pub last_time_shot: f64,
 }
 
-
 impl Default for Shoots {
     fn default() -> Self {
         Shoots {
@@ -19,4 +18,3 @@ impl Default for Shoots {
         }
     }
 }
-

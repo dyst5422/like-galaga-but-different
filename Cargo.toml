@@ -8,3 +8,4 @@ edition = "2018"
 [dependencies]
 bevy = { version = "*", features = ["dynamic"] }
 bevy_rapier2d = { version = "*", features = ["simd-nightly", "parallel", "serde-serialize", "render"]}
+
